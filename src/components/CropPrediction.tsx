@@ -8,7 +8,8 @@ import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
-import { BarChart3, AlertTriangle, TrendingUp, Leaf } from 'lucide-react';
+import { BarChart3, AlertTriangle, TrendingUp, Leaf, Beaker } from 'lucide-react';
+import { FertilizerRecommendation } from './FertilizerRecommendation';
 
 interface SoilData {
   temperature: number;
@@ -306,6 +307,19 @@ export function CropPrediction() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Automatic Fertilizer Recommendation */}
+      {prediction && (
+        <div className="space-y-6">
+          <div className="text-center">
+            <h3 className="text-2xl font-bold mb-2 bg-gradient-primary bg-clip-text text-transparent">
+              Fertilizer Recommendation for {prediction.crop}
+            </h3>
+            <p className="text-muted-foreground">Based on your predicted crop and soil conditions</p>
+          </div>
+          <FertilizerRecommendation predictedCrop={prediction.crop} soilConditions={soilData} />
+        </div>
+      )}
     </div>
   );
 }

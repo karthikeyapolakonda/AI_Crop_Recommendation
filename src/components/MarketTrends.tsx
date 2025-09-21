@@ -191,8 +191,8 @@ export function MarketTrends() {
                 <div key={price.id} className="p-3 border rounded-lg">
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-medium capitalize text-sm">{price.crop_name}</h4>
-                    <Badge variant="outline" className="text-xs">
-                      {price.currency} {price.price_per_kg}
+                     <Badge variant="outline" className="text-xs">
+                      ₹{price.price_per_kg}/{t('market.pricePerKg')}
                     </Badge>
                   </div>
                   <div className="text-xs text-muted-foreground space-y-1">

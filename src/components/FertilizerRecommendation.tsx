@@ -17,6 +17,21 @@ interface FertilizerData {
   cropType: string;
 }
 
+interface SoilConditions {
+  temperature: number;
+  humidity: number;
+  ph: number;
+  rainfall: number;
+  nitrogen: number;
+  phosphorus: number;
+  potassium: number;
+}
+
+interface FertilizerRecommendationProps {
+  predictedCrop?: string;
+  soilConditions?: SoilConditions;
+}
+
 interface FertilizerRecommendation {
   type: string;
   amount: string;
@@ -26,19 +41,26 @@ interface FertilizerRecommendation {
   priority: 'high' | 'medium' | 'low';
 }
 
-export function FertilizerRecommendation() {
+export function FertilizerRecommendation({ predictedCrop, soilConditions }: FertilizerRecommendationProps = {}) {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [soilData, setSoilData] = useState<FertilizerData>({
-    nitrogen: 30,
-    phosphorus: 20,
-    potassium: 25,
-    ph: 6.5,
+    nitrogen: soilConditions?.nitrogen || 30,
+    phosphorus: soilConditions?.phosphorus || 20,
+    potassium: soilConditions?.potassium || 25,
+    ph: soilConditions?.ph || 6.5,
     organicMatter: 3.5,
-    cropType: 'wheat'
+    cropType: predictedCrop?.toLowerCase() || 'wheat'
   });
   const [recommendations, setRecommendations] = useState<FertilizerRecommendation[]>([]);
+
+  // Auto-generate recommendations when crop is predicted
+  React.useEffect(() => {
+    if (predictedCrop && soilConditions) {
+      generateRecommendations();
+    }
+  }, [predictedCrop, soilConditions]);
 
   const handleInputChange = (field: keyof FertilizerData, value: string) => {
     if (field === 'cropType') {
