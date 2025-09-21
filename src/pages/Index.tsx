@@ -1,12 +1,48 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React, { useState } from 'react';
+import { Navigation } from '@/components/Navigation';
+import { HomePage } from '@/components/HomePage';
+import { CropPrediction } from '@/components/CropPrediction';
+import { FertilizerRecommendation } from '@/components/FertilizerRecommendation';
+import { MarketTrends } from '@/components/MarketTrends';
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState('home');
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'home':
+        return <HomePage onNavigate={handleTabChange} />;
+      case 'prediction':
+        return <CropPrediction />;
+      case 'fertilizer':
+        return <FertilizerRecommendation />;
+      case 'market':
+        return <MarketTrends />;
+      default:
+        return <HomePage onNavigate={handleTabChange} />;
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navigation activeTab={activeTab} onTabChange={handleTabChange} />
+      
+      <main className="container mx-auto px-4 py-8">
+        {renderContent()}
+      </main>
+      
+      {/* Footer */}
+      <footer className="border-t border-border mt-16">
+        <div className="container mx-auto px-4 py-8">
+          <div className="text-center text-muted-foreground">
+            <p>&copy; 2024 CropWise AI Guidance. Empowering farmers with intelligent technology.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
