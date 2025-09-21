@@ -5,12 +5,13 @@ import { useLanguage } from '@/context/LanguageContext';
 import { 
   Sprout, 
   BarChart3, 
-  Beaker, 
   TrendingUp, 
   Brain, 
   Leaf,
   Target,
-  Award
+  Award,
+  Cloud,
+  Calculator
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -23,24 +24,24 @@ export function HomePage({ onNavigate }: HomePageProps) {
   const features = [
     {
       icon: Brain,
-      title: 'AI-Powered Predictions',
-      description: 'Advanced machine learning algorithms analyze soil conditions to predict optimal crops and yields.',
+      title: 'AI-Powered Crop Prediction',
+      description: 'Machine learning algorithms analyze soil data to predict the best crops with actual crop names from our dataset.',
       color: 'text-primary',
       action: () => onNavigate('prediction')
     },
     {
-      icon: Beaker,
-      title: 'Smart Fertilizer Guidance',
-      description: 'Personalized fertilizer recommendations based on comprehensive soil analysis and crop requirements.',
+      icon: TrendingUp,
+      title: 'Weather Forecast',
+      description: '7-day weather forecast with farming alerts and recommendations for optimal agricultural planning.',
       color: 'text-accent',
-      action: () => onNavigate('fertilizer')
+      action: () => onNavigate('weather')
     },
     {
-      icon: TrendingUp,
-      title: 'Market Intelligence',
-      description: 'Real-time market trends and profitability analysis to help you make informed crop selection decisions.',
+      icon: Target,
+      title: 'Profit Calculator',
+      description: 'Calculate expected profits, ROI, and break-even analysis for informed crop selection decisions.',
       color: 'text-success',
-      action: () => onNavigate('market')
+      action: () => onNavigate('profit')
     }
   ];
 
@@ -172,17 +173,26 @@ export function HomePage({ onNavigate }: HomePageProps) {
             onClick={() => onNavigate('prediction')}
             className="bg-white text-primary hover:bg-white/90"
           >
-            <BarChart3 className="h-5 w-5 mr-2" />
-            Start Prediction
+            <Brain className="h-5 w-5 mr-2" />
+            AI Crop Prediction
           </Button>
           <Button 
             size="lg" 
             variant="outline"
-            onClick={() => onNavigate('fertilizer')}
+            onClick={() => onNavigate('weather')}
             className="bg-white text-primary hover:bg-white/90"
           >
-            <Beaker className="h-5 w-5 mr-2" />
-            Get Fertilizer Guide
+            <Cloud className="h-5 w-5 mr-2" />
+            Weather Forecast
+          </Button>
+          <Button 
+            size="lg" 
+            variant="outline"
+            onClick={() => onNavigate('profit')}
+            className="bg-white text-primary hover:bg-white/90"
+          >
+            <Calculator className="h-5 w-5 mr-2" />
+            Profit Calculator
           </Button>
         </div>
       </section>

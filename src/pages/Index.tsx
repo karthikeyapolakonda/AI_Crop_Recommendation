@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { HomePage } from '@/components/HomePage';
 import { CropPrediction } from '@/components/CropPrediction';
-import { FertilizerRecommendation } from '@/components/FertilizerRecommendation';
+import { WeatherForecast } from '@/components/WeatherForecast';
+import { ProfitCalculator } from '@/components/ProfitCalculator';
 import { MarketTrends } from '@/components/MarketTrends';
 
 const Index = () => {
@@ -18,8 +19,10 @@ const Index = () => {
         return <HomePage onNavigate={handleTabChange} />;
       case 'prediction':
         return <CropPrediction />;
-      case 'fertilizer':
-        return <FertilizerRecommendation />;
+      case 'weather':
+        return <WeatherForecast />;
+      case 'profit':
+        return <ProfitCalculator />;
       case 'market':
         return <MarketTrends />;
       default:

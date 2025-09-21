@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { useLanguage } from '@/context/LanguageContext';
-import { Sprout, BarChart3, Beaker, TrendingUp } from 'lucide-react';
+import { Sprout, BarChart3, Cloud, Calculator, TrendingUp } from 'lucide-react';
 
 interface NavigationProps {
   activeTab: string;
@@ -15,7 +15,8 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
   const navItems = [
     { id: 'home', label: t('common.home'), icon: Sprout },
     { id: 'prediction', label: t('navigation.cropPrediction'), icon: BarChart3 },
-    { id: 'fertilizer', label: t('navigation.fertilizer'), icon: Beaker },
+    { id: 'weather', label: 'Weather', icon: Cloud },
+    { id: 'profit', label: 'Profit', icon: Calculator },
     { id: 'market', label: t('navigation.marketTrends'), icon: TrendingUp },
   ];
 
